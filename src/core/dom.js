@@ -1,4 +1,3 @@
-
 class Dom {
   constructor(selector) {
     this.$el =
@@ -67,6 +66,15 @@ class Dom {
 export function $(selector) {
   return new Dom(selector);
 }
+
+$.create = (tagName, classes = "") => {
+  const el = document.createElement(tagName);
+  if (classes) {
+    el.classList.add(classes);
+  }
+  return $(el);
+};
+
 
 $.create = (tagName, classes = "") => {
   const el = document.createElement(tagName);
