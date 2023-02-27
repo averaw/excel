@@ -1,4 +1,3 @@
-//
 class Dom {
   constructor(selector) {
     this.$el =
@@ -42,19 +41,40 @@ class Dom {
     return this;
   }
 
+  get data() {
+    return this.$el.dataset;
+  }
+
+  findAll(selector) {
+    return this.$el.querySelectorAll(selector);
+  }
+
   closest(selector) {
     return $(this.$el.closest(selector));
   }
   getCoords() {
     return this.$el.getBoundingClientRect();
   }
-
+  css(styles = {}) {
+    Object.keys(styles).forEach((key) => {
+      this.$el.style[key] = styles[key];
+    });
+  }
 }
 
 // event.target
 export function $(selector) {
   return new Dom(selector);
 }
+
+$.create = (tagName, classes = "") => {
+  const el = document.createElement(tagName);
+  if (classes) {
+    el.classList.add(classes);
+  }
+  return $(el);
+};
+
 
 $.create = (tagName, classes = "") => {
   const el = document.createElement(tagName);
